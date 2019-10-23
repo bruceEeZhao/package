@@ -215,8 +215,8 @@ class emotion(DataProcessor):
     dataFrame = pd.read_csv('./datas/preprocessed_train_data.csv').astype('str')
     for index, item in dataFrame.iterrows(): 
       guid = tokenization.convert_to_unicode(item[0])      # id
-      text_a = tokenization.convert_to_unicode(item[4])    # title
-      label = tokenization.convert_to_unicode(item[3])     # label
+      text_a = tokenization.convert_to_unicode(item[1])    # title
+      label = tokenization.convert_to_unicode(item[2])     # label
       examples.append(
         InputExample(guid=guid, text_a=text_a, label=label))
     return examples
@@ -227,8 +227,8 @@ class emotion(DataProcessor):
     dataFrame = pd.read_csv('./datas/preprocessed_dev_data.csv').astype('str')
     for index, item in dataFrame.iterrows(): 
       guid = tokenization.convert_to_unicode(item[0])      # id
-      text_a = tokenization.convert_to_unicode(item[4])    # title
-      label = tokenization.convert_to_unicode(item[3])     # label
+      text_a = tokenization.convert_to_unicode(item[1])    # title
+      label = tokenization.convert_to_unicode(item[2])     # label
       examples.append(
         InputExample(guid=guid, text_a=text_a, label=label))
     return examples

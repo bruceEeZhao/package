@@ -8,6 +8,9 @@ def filter(text):
 
     return text
 
+def remove_end(text):
+    return text.split('end')[0]
+
 def data_prprocess(train_data_path, label_data_path, test_data_path):
     train_data = pd.read_csv(train_data_path)
     label_data = pd.read_csv(label_data_path)
@@ -32,6 +35,8 @@ def data_prprocess(train_data_path, label_data_path, test_data_path):
     # 去除文章中的 \n 字符
     train_data['title_content'].replace('\n', '', regex = True, inplace = True)
 
+    train_data['title_content'] = train_data['title_content'].apply(remove_end)
+
     test_data = pd.read_csv(test_data_path)
     test_data['content'] = test_data['content'].fillna('无')
     test_data['title'] = test_data['title'].fillna('无')
@@ -50,8 +55,8 @@ def data_prprocess(train_data_path, label_data_path, test_data_path):
     print(dev_data.shape)
     print(train_data.shape)
 
-    dev_data.to_csv('./datas/preprocessed_dev_data.csv', index=False)
-    train_data.to_csv('./datas/preprocessed_train_data.csv', index=False)
+    dev_data[['id','title_content','label']].to_csv('./datas/preprocessed_dev_data.csv', index=False)
+    train_data[['id','title_content','label']].to_csv('./datas/preprocessed_train_data.csv', index=False)
     test_data.to_csv('./datas/preprocessed_test_data.csv', index=False)
 
 if __name__ == "__main__":
